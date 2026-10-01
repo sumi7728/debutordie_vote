@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>秘密投票系統</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        button { padding: 10px 20px; font-size: 18px; margin: 10px; cursor: pointer; }
+        #message { color: green; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>請選擇你支持的項目</h1>
+    <!-- 這裡把選項傳給 vote 函數 -->
+    <button onclick="vote('選項A')">投給 選項A</button>
+    <button onclick="vote('選項B')">投給 選項B</button>
+    
+    <p id="message"></p>
+
+    <!-- 引入 Firebase -->
+    <script type="module">
+        // 使用 v10 的模組化寫法
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 貼上你在 Step 3 拿到的設定！
+        const firebaseConfig = {
+            apiKey: "你的_API_KEY",
+            authDomain: "你的_AUTH_DOMAIN",
+            projectId: "你的_PROJECT_ID",
+            storageBucket: "你的_STORAGE_BUCKET",
+            messagingSenderId: "你的_SENDER_ID",
+            appId: "你的_APP_ID"
+        };
+
+        // 初始化 Firebase 與資料庫
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 把 vote 函數掛到 window 上，讓 HTML 的 onclick 可以呼叫
+        window.vote = async function(choice) {
+            try {
+                // 把票數寫入名為 "votes" 的集合 (collection) 中
+                await addDoc(collection(db, "votes"), {
+                    selection: choice,
+                    timestamp: new Date()
+                });
+                
+                // 成功後的畫面處理
+                document.getElementById('message').innerText = "投票成功！感謝您的參與。";
+                // 隱藏按鈕，避免使用者狂點
+                document.querySelectorAll('button').forEach(btn => btn.style.display = 'none');
+                
+            } catch (e) {
+                console.error("投票失敗: ", e);
+                alert("發生錯誤，請稍後再試");
+            }
+        }
+    </script>
+</body>
+</html>
