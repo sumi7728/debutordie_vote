@@ -2,61 +2,293 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>秘密投票系統</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBUT OR DIE - 官方投票通道</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        button { padding: 10px 20px; font-size: 18px; margin: 10px; cursor: pointer; }
-        #message { color: green; font-weight: bold; margin-top: 20px; }
+        /* 全局設定與高級深色背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1e2235, #0a0b10);
+            color: #eaeaea;
+            font-family: 'Helvetica Neue', 'PingFang TC', '微軟正黑體', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 頂部 Logo */
+        .logo-container {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .logo-container img {
+            max-width: 350px;
+            width: 90%;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+        }
+
+        /* 投票區塊 */
+        .voting-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        /* 練習生卡片 */
+        .candidate {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            width: 140px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* 頭貼 */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #333;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            filter: grayscale(30%);
+        }
+
+        /* 名字 */
+        .name {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        /* 🎯 選中狀態：深色陰影與高光 */
+        .candidate.selected {
+            background: rgba(10, 15, 30, 0.8);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            /* 深色立體陰影 */
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.9), 
+                inset 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .candidate.selected .avatar {
+            border-color: #d4af37; /* 質感金色邊框 */
+            filter: grayscale(0%);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .candidate.selected .name {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+
+        /* 懸停效果 (未選中時) */
+        .candidate:hover:not(.selected) {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* 送出按鈕 */
+        .submit-btn {
+            margin-top: 40px;
+            margin-bottom: 60px;
+            padding: 15px 60px;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #2c2f3f, #15161d);
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #383c50, #1b1d26);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transform: scale(1.02);
+        }
+        
+        .submit-btn:disabled {
+            background: #222;
+            color: #555;
+            border-color: #333;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* 底部與隱藏機關 */
+        .footer {
+            margin-top: auto;
+            padding-bottom: 20px;
+            font-size: 0.8rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        .secret-trigger {
+            cursor: default;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
 
-    <h1>請選擇你支持的項目</h1>
-    <!-- 這裡把選項傳給 vote 函數 -->
-    <button onclick="vote('選項A')">投給 選項A</button>
-    <button onclick="vote('選項B')">投給 選項B</button>
-    
-    <p id="message"></p>
+    <!-- 頂部 Logo 區塊 -->
+    <div class="logo-container">
+        <img src="image_b3a477.png" alt="DEBUT OR DIE">
+    </div>
 
-    <!-- 引入 Firebase -->
+    <!-- 7位練習生投票區 -->
+    <div class="voting-grid">
+        <div class="candidate" onclick="toggleSelection(this, '林宇軒')">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">林宇軒</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '陳柏翰')">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">陳柏翰</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '張皓宇')">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">張皓宇</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '李子傑')">
+            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">李子傑</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '王承恩')">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">王承恩</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '吳俊熙')">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">吳俊熙</div>
+        </div>
+        <div class="candidate" onclick="toggleSelection(this, '劉柏辰')">
+            <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <div class="name">劉柏辰</div>
+        </div>
+    </div>
+
+    <!-- 送出按鈕 -->
+    <button class="submit-btn" onclick="submitVote()">確認投票</button>
+
+    <!-- 底部版權宣告與隱藏機關 -->
+    <div class="footer">
+        © 2026 DEBUT OR DIE<span class="secret-trigger" id="secretDot">.</span>
+    </div>
+
+    <!-- 🌟 這裡是 Firebase 連線的核心邏輯 -->
     <script type="module">
-        // 使用 v10 的模組化寫法
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        // 使用 CDN 載入 Firebase (採用最新 v12 版本相容寫法)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-        // 貼上你在 Step 3 拿到的設定！
+        // ⚠️⚠️⚠️ 請將這裡替換成你在 Firebase 後台取得的專屬設定檔！⚠️⚠️⚠️
         const firebaseConfig = {
-            apiKey: "你的_API_KEY",
-            authDomain: "你的_AUTH_DOMAIN",
-            projectId: "你的_PROJECT_ID",
-            storageBucket: "你的_STORAGE_BUCKET",
-            messagingSenderId: "你的_SENDER_ID",
-            appId: "你的_APP_ID"
-        };
+        apiKey: "AIzaSyBHLaB5pg-7MFIUg1QnUjP2rWFTmsaTjss",
+        authDomain: "debut-or-die-vote.firebaseapp.com",
+        projectId: "debut-or-die-vote",
+        storageBucket: "debut-or-die-vote.firebasestorage.app",
+        messagingSenderId: "1015987389069",
+        appId: "1:1015987389069:web:52bd3bdf02e246028b58c4",
+        measurementId: "G-8W7WJYM8WP"
+       };
 
-        // 初始化 Firebase 與資料庫
+        // 初始化 Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 把 vote 函數掛到 window 上，讓 HTML 的 onclick 可以呼叫
-        window.vote = async function(choice) {
+        // 網頁互動變數
+        let selectedCandidate = null;
+
+        // 綁定點擊事件到全域 (因為使用 type="module")
+        window.toggleSelection = function(element, name) {
+            const allCandidates = document.querySelectorAll('.candidate');
+            allCandidates.forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedCandidate = name;
+        }
+
+        // 送出選票寫入資料庫
+        window.submitVote = async function() {
+            if (!selectedCandidate) {
+                alert("請先選擇一位練習生！");
+                return;
+            }
+
+            const btn = document.querySelector('.submit-btn');
+            const originalText = btn.innerText;
+
             try {
-                // 把票數寫入名為 "votes" 的集合 (collection) 中
+                // 狀態改為傳送中
+                btn.innerText = "投票傳送中...";
+                btn.disabled = true;
+
+                // 將票數寫入 Firebase 的 "votes" 集合中
                 await addDoc(collection(db, "votes"), {
-                    selection: choice,
+                    selection: selectedCandidate,
                     timestamp: new Date()
                 });
                 
-                // 成功後的畫面處理
-                document.getElementById('message').innerText = "投票成功！感謝您的參與。";
-                // 隱藏按鈕，避免使用者狂點
-                document.querySelectorAll('button').forEach(btn => btn.style.display = 'none');
+                alert(`投票成功！您已將寶貴的一票投給了：${selectedCandidate}`);
                 
+                // 投完票後狀態
+                btn.innerText = "已完成投票";
+                selectedCandidate = null;
+                document.querySelectorAll('.candidate').forEach(el => {
+                    el.classList.remove('selected');
+                    el.style.pointerEvents = 'none'; // 讓選項不能再被點擊
+                });
+
             } catch (e) {
                 console.error("投票失敗: ", e);
-                alert("發生錯誤，請稍後再試");
+                alert("連線發生錯誤，請稍後再試！或請檢查 Firebase 設定是否正確。");
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
+
+        // 🕵️‍♂️️ 隱藏後台登入機關 (連點3次句號觸發)
+        let clickCount = 0;
+        let clickTimer;
+        document.getElementById('secretDot').addEventListener('click', function(e) {
+            clickCount++;
+            if (clickCount === 1) {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+            }
+            if (clickCount === 3) {
+                clearTimeout(clickTimer);
+                clickCount = 0;
+                const password = prompt("⚠️ 系統後台管理\n請輸入存取密碼：");
+                if (password === "admin123") {
+                    alert("登入成功！即將為您開啟資料庫。");
+                    // 密碼正確直接帶往 Firebase 控制台
+                    window.open("https://console.firebase.google.com/", "_blank");
+                } else if (password !== null) {
+                    alert("密碼錯誤，拒絕存取。");
+                }
+            }
+        });
     </script>
 </body>
 </html>
