@@ -2,31 +2,36 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DEBUT OR DIE - 官方投票通道</title>
+    <!-- 引入 Chart.js 畫圖表 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* 全局設定與高級深色背景 */
         body {
             margin: 0;
             padding: 0;
             background: radial-gradient(circle at top, #1e2235, #0a0b10);
+            background-attachment: fixed;
             color: #eaeaea;
             font-family: 'Helvetica Neue', 'PingFang TC', '微軟正黑體', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
         /* 頂部 Logo */
         .logo-container {
-            margin-top: 50px;
-            margin-bottom: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
             text-align: center;
+            width: 100%;
         }
         .logo-container img {
-            max-width: 350px;
-            width: 90%;
+            max-width: 320px;
+            width: 85%;
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
         }
 
@@ -35,9 +40,11 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 12px;
+            width: 100%;
             max-width: 900px;
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
         }
 
         /* 練習生卡片 */
@@ -47,49 +54,47 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 15px 5px;
             cursor: pointer;
-            width: 140px;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            width: calc(50% - 6px); 
+            max-width: 160px;
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none; 
         }
 
-        /* 頭貼 */
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #333;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
             filter: grayscale(30%);
         }
 
-        /* 名字 */
         .name {
-            font-size: 1.1rem;
+            font-size: 1rem;
             letter-spacing: 2px;
             font-weight: 500;
             color: #888;
             transition: all 0.3s ease;
         }
 
-        /* 🎯 選中狀態：深色陰影與高光 */
         .candidate.selected {
-            background: rgba(10, 15, 30, 0.8);
+            background: rgba(10, 15, 30, 0.85);
             border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px) scale(1.05);
-            /* 深色立體陰影 */
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.9), 
-                inset 0 0 20px rgba(0, 0, 0, 0.8);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         .candidate.selected .avatar {
-            border-color: #d4af37; /* 質感金色邊框 */
+            border-color: #d4af37;
             filter: grayscale(0%);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
         .candidate.selected .name {
@@ -98,18 +103,14 @@
             font-weight: bold;
         }
 
-        /* 懸停效果 (未選中時) */
-        .candidate:hover:not(.selected) {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-
         /* 送出按鈕 */
         .submit-btn {
-            margin-top: 40px;
-            margin-bottom: 60px;
-            padding: 15px 60px;
-            font-size: 1.2rem;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            width: 85%;
+            max-width: 350px;
+            padding: 16px 0;
+            font-size: 1.15rem;
             letter-spacing: 4px;
             background: linear-gradient(135deg, #2c2f3f, #15161d);
             color: #d4af37;
@@ -118,35 +119,65 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #383c50, #1b1d26);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            transform: scale(1.02);
-        }
-        
+        .submit-btn:active { transform: scale(0.97); }
         .submit-btn:disabled {
-            background: #222;
-            color: #555;
-            border-color: #333;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
+            background: #222; color: #555; border-color: #333;
+            cursor: not-allowed; box-shadow: none; transform: none;
         }
 
-        /* 底部與隱藏機關 */
         .footer {
             margin-top: auto;
-            padding-bottom: 20px;
+            padding-bottom: 30px;
             font-size: 0.8rem;
             color: #444;
             letter-spacing: 1px;
         }
+        .secret-trigger { cursor: default; user-select: none; }
 
-        .secret-trigger {
-            cursor: default;
-            user-select: none;
+        /* 📊 隱藏的後台數據面板 (預設隱藏) */
+        #adminPanel {
+            display: none; /* 預設隱藏 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 11, 16, 0.98);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .admin-header {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .close-admin-btn {
+            margin-top: 30px;
+            padding: 10px 30px;
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #555;
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .voting-grid { gap: 25px; padding: 20px; }
+            .candidate { width: 140px; padding: 20px; }
+            .submit-btn { width: auto; padding: 15px 60px; }
         }
     </style>
 </head>
@@ -160,115 +191,106 @@
     <!-- 7位練習生投票區 -->
     <div class="voting-grid">
         <div class="candidate" onclick="toggleSelection(this, '林宇軒')">
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" class="avatar">
             <div class="name">林宇軒</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '陳柏翰')">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" class="avatar">
             <div class="name">陳柏翰</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '張皓宇')">
-            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop" class="avatar">
             <div class="name">張皓宇</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '李子傑')">
-            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop" class="avatar">
             <div class="name">李子傑</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '王承恩')">
-            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop" class="avatar">
             <div class="name">王承恩</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '吳俊熙')">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" class="avatar">
             <div class="name">吳俊熙</div>
         </div>
         <div class="candidate" onclick="toggleSelection(this, '劉柏辰')">
-            <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200&h=200&fit=crop" class="avatar" alt="頭貼">
+            <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200&h=200&fit=crop" class="avatar">
             <div class="name">劉柏辰</div>
         </div>
     </div>
 
-    <!-- 送出按鈕 -->
     <button class="submit-btn" onclick="submitVote()">確認投票</button>
 
-    <!-- 底部版權宣告與隱藏機關 -->
     <div class="footer">
         © 2026 DEBUT OR DIE<span class="secret-trigger" id="secretDot">.</span>
     </div>
 
-    <!-- 🌟 這裡是 Firebase 連線的核心邏輯 -->
+    <!-- 📊 隱藏的後台數據面板 -->
+    <div id="adminPanel">
+        <div class="admin-header">即時得票數據</div>
+        <div class="chart-container">
+            <canvas id="voteChart"></canvas>
+        </div>
+        <button class="close-admin-btn" onclick="closeAdminPanel()">關閉面板</button>
+    </div>
+
+    <!-- 🌟 Firebase 連線邏輯 -->
     <script type="module">
-        // 使用 CDN 載入 Firebase (採用最新 v12 版本相容寫法)
+        // 注意：這裡多引入了 getDocs 來讀取資料庫
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-        // ⚠️⚠️⚠️ 請將這裡替換成你在 Firebase 後台取得的專屬設定檔！⚠️⚠️⚠️
+        // ⚠️⚠️⚠️ 記得填入你的設定檔 ⚠️⚠️⚠️
         const firebaseConfig = {
-        apiKey: "AIzaSyBHLaB5pg-7MFIUg1QnUjP2rWFTmsaTjss",
-        authDomain: "debut-or-die-vote.firebaseapp.com",
-        projectId: "debut-or-die-vote",
-        storageBucket: "debut-or-die-vote.firebasestorage.app",
-        messagingSenderId: "1015987389069",
-        appId: "1:1015987389069:web:52bd3bdf02e246028b58c4",
-        measurementId: "G-8W7WJYM8WP"
-       };
+            apiKey: "請填入你的_API_KEY",
+            authDomain: "請填入你的_AUTH_DOMAIN",
+            projectId: "請填入你的_PROJECT_ID",
+            storageBucket: "請填入你的_STORAGE_BUCKET",
+            messagingSenderId: "請填入你的_SENDER_ID",
+            appId: "請填入你的_APP_ID"
+        };
 
-        // 初始化 Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        // 網頁互動變數
         let selectedCandidate = null;
+        let myChart = null; // 儲存圖表實例
 
-        // 綁定點擊事件到全域 (因為使用 type="module")
         window.toggleSelection = function(element, name) {
             const allCandidates = document.querySelectorAll('.candidate');
             allCandidates.forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             selectedCandidate = name;
+            if (navigator.vibrate) navigator.vibrate(50);
         }
 
-        // 送出選票寫入資料庫
         window.submitVote = async function() {
-            if (!selectedCandidate) {
-                alert("請先選擇一位練習生！");
-                return;
-            }
-
+            if (!selectedCandidate) { alert("請先選擇一位練習生！"); return; }
             const btn = document.querySelector('.submit-btn');
             const originalText = btn.innerText;
-
             try {
-                // 狀態改為傳送中
                 btn.innerText = "投票傳送中...";
                 btn.disabled = true;
-
-                // 將票數寫入 Firebase 的 "votes" 集合中
                 await addDoc(collection(db, "votes"), {
                     selection: selectedCandidate,
                     timestamp: new Date()
                 });
-                
                 alert(`投票成功！您已將寶貴的一票投給了：${selectedCandidate}`);
-                
-                // 投完票後狀態
                 btn.innerText = "已完成投票";
                 selectedCandidate = null;
                 document.querySelectorAll('.candidate').forEach(el => {
                     el.classList.remove('selected');
-                    el.style.pointerEvents = 'none'; // 讓選項不能再被點擊
+                    el.style.pointerEvents = 'none'; 
                 });
-
             } catch (e) {
                 console.error("投票失敗: ", e);
-                alert("連線發生錯誤，請稍後再試！或請檢查 Firebase 設定是否正確。");
+                alert("連線發生錯誤，請稍後再試！");
                 btn.innerText = originalText;
                 btn.disabled = false;
             }
         }
 
-        // 🕵️‍♂️️ 隱藏後台登入機關 (連點3次句號觸發)
+        // 🕵️‍♂ 隱藏後台登入機關 
         let clickCount = 0;
         let clickTimer;
         document.getElementById('secretDot').addEventListener('click', function(e) {
@@ -281,14 +303,84 @@
                 clickCount = 0;
                 const password = prompt("⚠️ 系統後台管理\n請輸入存取密碼：");
                 if (password === "admin123") {
-                    alert("登入成功！即將為您開啟資料庫。");
-                    // 密碼正確直接帶往 Firebase 控制台
-                    window.open("https://console.firebase.google.com/", "_blank");
+                    loadAdminData(); // 密碼正確，開始抓資料畫圖
                 } else if (password !== null) {
                     alert("密碼錯誤，拒絕存取。");
                 }
             }
         });
+
+        // 關閉圖表面板
+        window.closeAdminPanel = function() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        // 📊 撈取 Firebase 資料並畫圖
+        async function loadAdminData() {
+            // 顯示載入中的黑畫面
+            document.getElementById('adminPanel').style.display = 'flex';
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, "votes"));
+                
+                // 統計票數
+                let voteCounts = {
+                    '林宇軒': 0, '陳柏翰': 0, '張皓宇': 0, '李子傑': 0, 
+                    '王承恩': 0, '吳俊熙': 0, '劉柏辰': 0
+                };
+                
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (voteCounts[data.selection] !== undefined) {
+                        voteCounts[data.selection]++;
+                    }
+                });
+
+                // 準備 Chart.js 需要的資料格式
+                const labels = Object.keys(voteCounts);
+                const data = Object.values(voteCounts);
+
+                // 如果之前有畫過圖表，先銷毀才能重畫
+                if (myChart) { myChart.destroy(); }
+
+                const ctx = document.getElementById('voteChart').getContext('2d');
+                
+                // 設定圖表外觀為高級金屬色調
+                Chart.defaults.color = '#ccc';
+                myChart = new Chart(ctx, {
+                    type: 'bar', // 橫向長條圖，適合手機觀看
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '當前得票數',
+                            data: data,
+                            backgroundColor: 'rgba(212, 175, 55, 0.8)', // 質感金色
+                            borderColor: '#d4af37',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', // 改為橫向顯示，名字才不會擠在一起
+                        responsive: true,
+                        scales: {
+                            x: { 
+                                beginAtZero: true,
+                                ticks: { stepSize: 1 } // 票數以整數顯示
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false } // 隱藏多餘的圖例標籤
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error("抓取資料失敗: ", error);
+                alert("無法讀取資料，請檢查 Firebase 安全規則是否已設為 allow read: if true;");
+                closeAdminPanel();
+            }
+        }
     </script>
 </body>
 </html>
