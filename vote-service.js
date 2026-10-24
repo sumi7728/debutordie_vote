@@ -13,9 +13,13 @@
     'bloody-paradise':{title:'Bloody Paradise',artist:'ENHYPEN'},
     'shangri-la':{title:'Shangri-La／桃源境',artist:'VIXX'}
   });
-  const MEMBERS=Object.freeze(Object.fromEntries(Array.from({length:7},(_,index)=>{
+  const characterNames=['朴炆旲','宣雅炫','李世振','裴世進','車尤金','金來彬','柳清佑'];
+  // Head crops from the original 670 × 536 TeSTAR uniform poster.
+  const portraitCrops=[[292,164,90,90],[201,142,88,88],[100,120,88,88],[22,175,88,88],[386,155,90,90],[475,155,90,90],[565,123,90,90]];
+  const portraitColors=['#94a9e8','#b2a1da','#8ec9cb','#abacd9','#df9eaf','#9ea6d0','#83b4d9'];
+  const MEMBERS=Object.freeze(Object.fromEntries(characterNames.map((name,index)=>{
     const number=String(index+1).padStart(2,'0');
-    return [`member-${number}`,{name:'角色名稱',coser:'COSER 的名字',label:`成員 ${number}・角色名稱（COSER 的名字）`}];
+    return [`member-${number}`,{name,num:number,coser:'COSER 的名字',avatar:'assets/testar-uniform.jpg',crop:portraitCrops[index],color:portraitColors[index],label:`成員 ${number}・${name}（COSER 的名字）`}];
   })));
   const memberIds=Object.keys(MEMBERS);
   const makeError=(code,message)=>Object.assign(new Error(message||code),{code});

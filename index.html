@@ -64,10 +64,37 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
 
 
 #listen-title:focus,#members-title:focus{outline:none}
+.mission-copy{font-size:clamp(17px,2.5svh,21px);font-weight:400;line-height:1.8;letter-spacing:.5px}.mission-lead{font-size:clamp(23px,7.8vw,32px);font-weight:800;line-height:1.4;color:#344f80}.mission-body{font-size:clamp(17px,2.5svh,21px);font-weight:400;color:#566f98}.briefing-footer strong{font-weight:700;color:#685b95;font-size:12px;letter-spacing:.5px}
+/* Mobile continuity, compact music footer, and chapter title choreography. */
+#app-shell{max-width:480px;margin:auto;background:linear-gradient(145deg,#dce5fa,#cbdcf2 55%,#cbd8ee)}
+#app-shell>.wrap,.masthead,.masthead .wrap{background:transparent}.mast-main{border-bottom-color:#ffffff66;height:72px}.chapter{padding-top:24px}
+.chapter-title h2,.group-chapter .chapter-title h2{font-weight:800;color:#304b72;letter-spacing:-1px}.chapter-title h2{font-size:27px}.chapter-index{font-family:var(--latin);font-weight:500;color:#788aba;letter-spacing:-1.5px}.chapter-title>p{font-weight:400;color:#61799a}.record h3{font-weight:700}.record-sub{font-weight:500!important;color:#516c91!important}.record-top{font-weight:700!important;color:#8195b7!important}.member-title{font-weight:700}.coser{font-weight:400}.stage-heading>span:first-child{font-weight:500}.stage-heading .count{font-weight:800;color:#526e9d}.stage-panel[data-song="shangri-la"] .count{color:#8b6eaa}.group-intro strong{font-weight:800;color:#617bb4}
+.song-card .track-cover{object-fit:contain!important;background:#edf2fa;padding:0;border-radius:4px}
+.chapter-splash{position:fixed;inset:0;z-index:9400;display:grid;place-items:center;background:#ccd9f2;overflow:hidden;touch-action:none}
+#chapter-float{display:flex;flex-direction:column;align-items:center;gap:20px;white-space:nowrap;font:800 clamp(29px,8vw,42px)/1.35 var(--sans);letter-spacing:-1px;color:#304b72;text-shadow:0 1px 0 #ffffff88}#chapter-float>span{display:block;transform-origin:center;will-change:transform}#chapter-float .chapter-index{font-size:clamp(80px,23vw,120px);font-weight:500;line-height:1;letter-spacing:-6px;color:#899dc5}
+.content-enter .record,.content-enter .cast-grid,.content-enter .stage-grid,.content-enter .relisten,.content-enter .ballot{animation:track-arrive .65s both}.content-enter .record:nth-of-type(2),.content-enter .stage-grid{animation-delay:.1s}.content-enter .relisten,.content-enter .ballot{animation-delay:.18s}
+.site-footer.soundcloud-source{position:relative;margin:0 auto;padding:8px 24px calc(10px + env(safe-area-inset-bottom));background:#cbd8ee;border-top:1px solid #ffffff88;font-size:9px;line-height:1.5}.music-details summary{display:flex;align-items:center;justify-content:space-between;min-height:34px;padding-right:88px;list-style:none;cursor:pointer;font-size:9px;font-weight:400;color:#6b81a5;gap:9px}.music-details summary::-webkit-details-marker{display:none}.music-details summary b{font:700 10px var(--latin);color:#4a668f;margin-left:6px}.music-expand{font-size:16px;transition:transform .3s}.music-details[open] .music-expand{transform:rotate(45deg)}.music-details iframe{margin:7px 0 6px}.music-details>a{display:block;font-size:9px;color:#617da6;text-decoration:none;margin-bottom:10px}.footer-credit{font-size:8px;color:#607a9c;line-height:1.7;padding-top:4px}.footer-credit span{font-weight:400;color:#7a8ead}.site-footer .bgm-toggle{position:absolute;top:12px;right:24px;bottom:auto;min-height:26px;padding:4px 9px;font-size:8px;letter-spacing:.4px;border-radius:14px;z-index:1}.system-intro .site-footer .bgm-toggle{position:fixed;top:auto;bottom:max(16px,env(safe-area-inset-bottom));right:16px;z-index:9700;min-height:32px;font-size:9px}.site-footer #bgm-status{font-size:9px;margin:2px 0 6px}
+@media(max-width:360px){.chapter-title h2,.group-chapter .chapter-title h2{font-size:23px}.site-footer.soundcloud-source{padding-left:18px;padding-right:18px}.site-footer .bgm-toggle{right:18px}.music-details summary b{font-size:9px;margin-left:3px}}
+@media(prefers-reduced-motion:reduce){.content-enter .record,.content-enter .cast-grid,.content-enter .stage-grid,.content-enter .relisten,.content-enter .ballot{animation:none}}
+.primary,.secondary,.ballot .primary{border-radius:999px}.back-listen{border-radius:999px;padding:8px 13px;background:#ffffff30;border:1px solid #ffffff66}.mini-play{border-radius:50%}.dialog-top button{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#ffffff4d;line-height:1}.briefing-scene{border-radius:24px}
+.chapter-title strong,.event-promo strong{font-weight:700;color:#526ba5}.mission-emphasis{font-weight:700;color:#5268a4}.stage-panel{height:260px;min-height:260px;grid-template-rows:34px 48px 1px minmax(0,1fr)}.stage-heading{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;align-content:center;gap:4px;text-align:center}.stage-heading>span:first-child{width:100%;font-size:8px;font-weight:700;letter-spacing:1.4px;text-align:center}.stage-heading .count{justify-self:center;line-height:1.2}.record-top,.deck-caption{text-align:center}.record-top{justify-content:center}
+.event-promo{position:relative;isolation:isolate;overflow:hidden;text-align:center;margin:8px 0 18px;padding:20px 14px;border:1px solid #ffffffb3;border-radius:22px;background:linear-gradient(130deg,#f7f8ff85,#e7ddfa80 60%,#daedf780);box-shadow:0 8px 25px #748ca512}.event-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.2px;color:#7c69a6;background:#ffffff66;border:1px solid #ffffffb3;border-radius:999px;padding:5px 12px}.event-promo h2{position:relative;z-index:1;margin:12px 0 8px;font-size:20px;font-weight:800;letter-spacing:.5px;color:#405c88}.event-promo p{position:relative;z-index:1;margin:0;font-size:11px;line-height:1.9;color:#6c7f9d}.event-promo .event-highlight{color:#85659e}.event-spark{position:absolute;right:10px;top:38px;font-size:78px;color:#ffffff40;z-index:-1;transform:rotate(12deg)}
+.disclaimer{margin-top:5px}.disclaimer summary{display:flex;justify-content:space-between;align-items:center;min-height:30px;cursor:pointer;list-style:none;font-size:9px;font-weight:600;color:#6f80a2;border-radius:12px}.disclaimer summary::-webkit-details-marker{display:none}.disclaimer summary>span{font-size:14px;transition:transform .3s}.disclaimer[open] summary>span{transform:rotate(45deg)}.site-footer .disclaimer p{font-size:11px;line-height:1.9;color:#627796;margin:7px 0 12px}.disclaimer strong{font-weight:700;color:#596c9b}.footer-credit b{font-weight:700;color:#6076a0}.music-details summary{border-radius:12px}
+.local-test-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px dashed #97a9c555;padding:10px 0 3px;margin-top:7px;color:#7c7297;font-size:9px}.local-test-tools button{border:1px solid #ffffffb3;border-radius:999px;padding:8px 12px;background:#ffffff50;color:#74618f;font-size:10px;font-weight:600}.local-test-tools button:disabled{opacity:.5}
+/* Pearl blue, lilac, mint and blush accents keep the two stages distinct. */
+#app-shell{background:radial-gradient(ellipse at 5% 6%,#e5e4ff9c,transparent 38%),radial-gradient(ellipse at 96% 52%,#d4f1ed80,transparent 48%),linear-gradient(155deg,#dce7fb,#cbdcf2 60%,#d4d8ed)}
+.mast-main>.right{color:#457d73}.mast-main>.right:before{width:6px;height:6px;background:#18db8a;box-shadow:0 0 0 3px #1bdd8e18,0 0 12px #16c67e88;animation:live-light 2.6s ease-in-out infinite}
+.primary{background:linear-gradient(115deg,#f0fcf9,#e4eaff 48%,#eee1f8);border-color:#ffffff;box-shadow:inset 0 1px 0 #ffffffb3,0 8px 24px #8498bc24}.primary:disabled{background:#cbd7e9;box-shadow:none}.mini-play{background:linear-gradient(135deg,#fff,#f1eaff);color:#6a7fb5}.chapter-title h2{color:#344d7f}.chapter-title h2:after{content:'';display:block;width:34px;height:3px;margin-top:12px;border-radius:999px;background:linear-gradient(90deg,#8eafe3,#b5a3d8,#8fcac4)}.group-chapter .chapter-title h2:after{margin-left:auto;margin-right:auto}
+.member-portrait{display:block;width:100%;height:100%;overflow:hidden;pointer-events:none}.cast-number{overflow:hidden;outline:3px solid var(--portrait-accent,#9cadde);outline-offset:2px;border:2px solid #f7fbff;box-shadow:0 7px 15px #6f89b72e}.member-title{font-size:11px;font-weight:700;letter-spacing:.5px}.coser{font-size:8px;letter-spacing:.25px}.stage-avatar{border:2px solid #fff;box-shadow:0 0 0 1px var(--portrait-accent,#9cadde),0 3px 8px #7489ad30}
+.cast-grid.all-assigned{min-height:92px;padding:12px 0 24px}.cast-grid.all-assigned .bank-empty{margin:12px 0;font-size:10px;color:#7085a8}
+.stage-panel{height:auto;min-height:248px;grid-template-rows:18px 76px 1px minmax(92px,auto);background:linear-gradient(155deg,#eff8ffad,#c6ddf39c);border-color:#f5fcff;box-shadow:inset 0 0 0 4px #ffffff18,0 7px 22px #7b9ac724}.stage-panel[data-song="shangri-la"]{background:linear-gradient(155deg,#f9efffb3,#d8c8e994);border-color:#fff4ff;box-shadow:inset 0 0 0 4px #ffffff18,0 7px 22px #a48bba24}.stage-heading{display:flex;justify-content:center;align-items:center}.stage-heading>span:first-child{color:#6d8eb8}.stage-panel[data-song="shangri-la"] .stage-heading>span:first-child{color:#987aa9}.stage-identity{align-self:center;text-align:center;min-width:0}.stage-panel .stage-identity h3{font-size:17px;line-height:1.25;margin:0;color:#3e5f8c;font-weight:700}.stage-panel[data-song="shangri-la"] .stage-identity h3{color:#795e98}.stage-panel .song-subtitle{font:600 11px/1.5 var(--sans);letter-spacing:1.5px;margin-top:3px;color:#886ea6}.stage-artist{font:400 9px/1.5 var(--sans);color:#8296b5;margin:7px 0 0;letter-spacing:.5px}.stage-artist strong{font:700 9px var(--latin);color:#6b85ad;letter-spacing:.8px;margin-left:4px}.stage-panel[data-song="shangri-la"] .stage-artist strong{color:#9b78a4}.assigned-list{overflow:visible;max-height:none}.stage-line{background:linear-gradient(90deg,transparent,#a5bfde99,transparent)}.stage-panel[data-song="shangri-la"] .stage-line{background:linear-gradient(90deg,transparent,#c2a6d199,transparent)}
+.event-promo{display:grid;grid-template-columns:54px minmax(0,1fr);align-items:center;gap:13px;text-align:left;margin:8px 0 16px;padding:12px 15px;border-radius:20px;background:linear-gradient(120deg,#eefbf885,#ede6fb99,#e9e7f785);box-shadow:0 6px 20px #8c9ab51a}.team-logo-slot{width:54px;height:54px;display:grid;place-items:center;border:1px solid #ffffffc9;border-radius:16px;background:linear-gradient(135deg,#fff9,#c1d8f359,#dcc7ee66);box-shadow:inset 0 0 0 3px #ffffff22}.team-logo-slot span{font-size:9px;font-weight:700;line-height:1.65;letter-spacing:.3px;text-align:center;color:#8393b7}.team-logo-slot img{display:block;width:100%;height:100%;object-fit:contain}.event-copy{min-width:0}.event-badge{font-size:8px;letter-spacing:.6px;padding:0;border:0;background:none;color:#8e74a7}.event-promo h2{font-size:16px;letter-spacing:.3px;margin:4px 0;color:#536389}.event-link{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:600;line-height:1.8;color:#658e9a;text-decoration:none;border-bottom:1px solid #89aea566}.event-link:hover{color:#8a69a5}.disclaimer a{color:#677eb0;text-underline-offset:3px}
+@keyframes live-light{0%,100%{box-shadow:0 0 0 3px #1bdd8e18,0 0 10px #16c67e66}50%{box-shadow:0 0 0 4px #1bdd8e25,0 0 16px #16c67e99}}
+@media(max-width:360px){.stage-panel .stage-identity h3{font-size:15px}.event-promo{gap:10px;padding:11px 12px;grid-template-columns:48px minmax(0,1fr)}.team-logo-slot{width:48px;height:48px;border-radius:14px}.event-promo h2{font-size:14px}.member-title{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.mast-main>.right:before{animation:none}}
 </style>
 </head>
 <body class="system-intro">
-  <button hidden type="button" id="bgm-toggle" class="bgm-toggle" aria-label="背景音樂" aria-pressed="false">音樂 OFF</button>
   <section class="intro-shell" id="intro-shell" aria-label="偶像股份公司啟動介面">
     <div class="boot-scene" id="boot-scene">
       <span class="boot-code">IDOL STOCK COMPANY / SYSTEM 01</span>
@@ -79,13 +106,14 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       </div>
       <noscript><p>請開啟 JavaScript 以進入投票。</p></noscript>
     </div>
-    <button hidden type="button" class="briefing-scene" id="briefing-scene" aria-label="分組指令：先聆聽歌曲，再拖曳成員頭貼選擇舞台。點擊進入歌曲試聽。">
+    <button hidden type="button" class="briefing-scene" id="briefing-scene" aria-label="舞台分組任務已發布。兩首指定曲目，七位待分組成員。請先完成試聽，再拖曳成員頭貼，配置舞台陣容。確認分組後，提交你的選擇。點擊畫面，開始任務。">
       <span class="briefing-meta">SYSTEM MESSAGE <span>MISSION / 01</span></span>
       <span class="mission-copy" id="mission-copy" aria-hidden="true"></span>
-      <span class="briefing-footer"><span class="tap-ring" aria-hidden="true"></span>點擊畫面，進入試聽<span class="briefing-arrow" aria-hidden="true">↑</span></span>
+      <span class="briefing-footer"><span class="tap-ring" aria-hidden="true"></span><strong>點擊畫面，開始任務。</strong><span class="briefing-arrow" aria-hidden="true">↑</span></span>
     </button>
   </section>
   <div class="scene-wipe" id="scene-wipe" aria-hidden="true"><span id="scene-label">CONNECTING</span></div>
+  <div class="chapter-splash" id="chapter-splash" hidden aria-hidden="true"><span id="chapter-float"></span></div>
   <div id="app-shell" hidden inert>
 
   <header class="masthead">
@@ -115,9 +143,9 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     </nav>
     <main>
       <section class="chapter" id="listen" aria-labelledby="listen-title">
-        <aside class="chapter-aside"><div class="chapter-number">01.</div><div><span class="micro">THE TRACK LIST</span><p>先聽兩首歌，再決定你的夢幻陣容。</p></div></aside>
+        <aside class="chapter-aside"><div class="chapter-number">01.</div><div><span class="micro">THE TRACK LIST</span><p>先聽兩首歌，再配置舞台陣容。</p></div></aside>
         <div class="chapter-content">
-          <div class="chapter-title"><h2 id="listen-title">01. 選擇舞台之前</h2><p>兩首歌曲，兩種舞台。</p></div>
+          <div class="chapter-title"><h2 id="listen-title"><span class="chapter-name">指定曲目試聽</span></h2><p><strong>兩首歌曲</strong>，兩種舞台。</p></div>
           <article class="record"><div class="audio-player song-card" aria-label="Bloody Paradise 試聽播放器"><img class="track-cover" src="assets/bloody-paradise.jpg" width="96" height="96" alt="Bloody Paradise 專輯封面"><div class="track-caption"><div class="record-top">TRACK 01</div><div class="song-title-row"><h3>Bloody Paradise</h3><button class="mini-play" type="button" aria-label="播放 Bloody Paradise" aria-pressed="false">▶</button></div><div class="record-sub">原唱 / ENHYPEN</div><a class="source-link" href="https://music.apple.com/us/album/bloody-paradise/6780548049?i=6780548391" target="_blank" rel="noopener noreferrer">Apple Music ↗</a></div><audio crossorigin="anonymous" preload="none" src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/11/aa/8a/11aa8a0e-6556-8e67-6ce0-978a8ee58099/mzaf_10822147013266606627.plus.aac.p.m4a"></audio><label class="deck-volume">音量<input type="range" min="0" max="100" value="30" aria-label="Bloody Paradise 音量"><output>30%</output></label><p class="mini-status" role="status"></p></div></article>
           <article class="record"><div class="audio-player song-card" aria-label="Shangri-La 試聽播放器"><img class="track-cover" src="assets/shangri-la.jpg" width="96" height="96" alt="Shangri-La 專輯封面"><div class="track-caption"><div class="record-top">TRACK 02</div><div class="song-title-row"><h3>Shangri-La<small>桃源境</small></h3><button class="mini-play" type="button" aria-label="播放 Shangri-La" aria-pressed="false">▶</button></div><div class="record-sub">原唱 / VIXX</div><a class="source-link" href="https://music.apple.com/us/album/shangri-la/1523264405?i=1523264616" target="_blank" rel="noopener noreferrer">Apple Music ↗</a></div><audio crossorigin="anonymous" preload="none" src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/96/99/33/9699336d-68ff-3420-0710-d13769732198/mzaf_2957247645363479484.plus.aac.p.m4a"></audio><label class="deck-volume">音量<input type="range" min="0" max="100" value="30" aria-label="Shangri-La 音量"><output>30%</output></label><p class="mini-status" role="status"></p></div></article>
           <button type="button" id="next-step" class="primary next-step">選擇陣容 <span>↑</span></button><p class="flow-note">07 MEMBERS / 02 STAGES</p><p class="player-hint">※ 試聽內容由 Apple Music 提供，實際可播放長度與地區限制依平台規定。</p>
@@ -126,36 +154,42 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       <section hidden class="chapter group-chapter" id="members" aria-labelledby="members-title">
         <aside class="chapter-aside"><div class="chapter-number">02.</div><div><span class="micro">THE LINEUP</span><p>將七位成員的圓圈拖進你心中的舞台。</p></div></aside>
         <div class="chapter-content">
-          <button type="button" class="back-listen" id="back-listen">← 返回試聽</button><div class="chapter-title"><h2 id="members-title">02. 你的夢幻陣容</h2><p>拖曳圓圈至歌曲區，為七位成員選擇舞台。</p></div>
+          <button type="button" class="back-listen" id="back-listen">← 返回試聽</button><div class="chapter-title"><h2 id="members-title"><span class="chapter-name">舞台陣容編組</span></h2><p><strong>拖曳成員頭貼</strong>，配置你期待的舞台陣容。</p></div>
           <div class="group-intro"><p id="assignment-hint">還有 <strong id="remaining">7</strong> 位成員尚未分組。</p><div class="group-tools"><button type="button" class="textbtn" id="randomize">隨機試排 ↗</button><button type="button" class="textbtn" id="reset">全部重置</button></div></div>
           <div class="cast-grid" id="cast-grid" aria-label="7 位成員分組選擇"></div>
           <div class="stage-grid" aria-label="分組結果預覽">
-            <div class="stage-panel" data-song="bloody-paradise" id="stage-a"><div class="stage-heading"><span>STAGE 01</span><span class="count" id="count-a">00 / 07</span></div><h3>Bloody Paradise</h3><div class="stage-line"></div><div class="assigned-list" id="assigned-a"><p class="empty">等待你的第一位人選。</p></div></div>
-            <div class="stage-panel" data-song="shangri-la" id="stage-b"><div class="stage-heading"><span>STAGE 02</span><span class="count" id="count-b">00 / 07</span></div><h3>Shangri-La <span style="font:500 11px var(--sans)">桃源境</span></h3><div class="stage-line"></div><div class="assigned-list" id="assigned-b"><p class="empty">等待你的第一位人選。</p></div></div>
+            <div class="stage-panel" data-song="bloody-paradise" id="stage-a"><div class="stage-heading"><span>STAGE 01</span></div><div class="stage-identity"><h3>Bloody Paradise</h3><p class="stage-artist">原唱 <strong>ENHYPEN</strong></p></div><div class="stage-line"></div><div class="assigned-list" id="assigned-a"><p class="empty">等待你的第一位人選。</p></div></div>
+            <div class="stage-panel" data-song="shangri-la" id="stage-b"><div class="stage-heading"><span>STAGE 02</span></div><div class="stage-identity"><h3>Shangri-La <span class="song-subtitle">桃源境</span></h3><p class="stage-artist">原唱 <strong>VIXX</strong></p></div><div class="stage-line"></div><div class="assigned-list" id="assigned-b"><p class="empty">等待你的第一位人選。</p></div></div>
           </div>
           <section class="relisten" aria-label="再次試聽"><div class="audio-player compact-player" id="group-player"><audio crossorigin="anonymous" preload="none" src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/11/aa/8a/11aa8a0e-6556-8e67-6ce0-978a8ee58099/mzaf_10822147013266606627.plus.aac.p.m4a"></audio><audio crossorigin="anonymous" preload="none" src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/96/99/33/9699336d-68ff-3420-0710-d13769732198/mzaf_2957247645363479484.plus.aac.p.m4a"></audio><div class="compact-title"><label class="deck-caption" for="deck-track">再聽一次</label><div class="song-title-row"><select id="deck-track" aria-label="選擇試聽歌曲"><option value="0">Bloody Paradise</option><option value="1">Shangri-La／桃源境</option></select><button class="mini-play" id="deck-play" type="button" aria-label="播放試聽" aria-pressed="false">▶</button></div><span id="deck-artist">ENHYPEN</span></div><label class="deck-volume">音量<input type="range" min="0" max="100" value="30" aria-label="試聽音量"><output>30%</output></label><p class="mini-status" role="status"></p></div></section><section class="ballot" id="submit" aria-labelledby="submit-heading"><div class="ballot-info"><span class="micro">03 / YOUR FINAL PICK</span><strong id="submit-heading">選好七位成員的舞台了嗎？</strong><p id="submit-help">分組完成後，可以先預覽整張選票，再確認送出。</p></div><button type="button" class="primary" id="review-btn" disabled><span>送出選票</span><span class="arr">↗</span></button></section>
           <p class="feedback" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
         </div>
       </section>
     </main>
-    <footer><div>《患上不出道就會死的病》同人 COS 企劃<br>非官方活動 · 音樂版權歸原權利人所有</div><div class="end">Your pick. Our stage.</div></footer>
+    <aside class="event-promo" aria-label="吃冰淇淋不加醬油 CDPS 晚場演出宣傳"><div class="team-logo-slot" aria-label="團隊 Logo 預留位置"><span>吃冰淇淋<br>不加醬油</span></div><div class="event-copy"><span class="event-badge">CDPS · 晚場演出</span><h2>吃冰淇淋不加醬油</h2><a class="event-link" href="https://www.facebook.com/people/CDPS%E8%A7%92%E8%89%B2%E4%B8%8D%E7%B4%AF-Cosplay-Dance-Performance-Stage/61574524753037/" target="_blank" rel="noopener noreferrer">CDPS 活動資訊 <span aria-hidden="true">↗</span></a></div></aside>
   </div>
   <dialog id="review-dialog" aria-labelledby="dialog-title"><div class="dialog-body"><div class="dialog-top"><span class="dialog-eyebrow" id="dialog-eyebrow">FINAL PICK</span><button type="button" id="close-dialog" aria-label="關閉確認視窗">×</button></div><div class="success-mark" aria-hidden="true">✓</div><h2 id="dialog-title">確認你的陣容</h2><p id="dialog-description">確認七位成員的分組。送出後同一個瀏覽器將無法再重新投票。</p><div class="review-list"><div class="review-row"><span class="letter">A</span><div><b>Bloody Paradise</b><small id="review-a"></small></div></div><div class="review-row"><span class="letter">B</span><div><b>Shangri-La 桃源境</b><small id="review-b"></small></div></div></div><p class="receipt" id="receipt" hidden></p><p class="feedback" id="dialog-status" role="status" aria-live="polite"></p><div class="dialog-actions"><button type="button" class="secondary" id="back-btn">再調整一下</button><button type="button" class="primary" id="confirm-btn"><span>確認送出 ↗</span></button></div></div></dialog>
   </div>
 
-  <aside class="soundcloud-source" aria-label="背景音樂來源">
-    <div class="music-source-label">BACKGROUND MUSIC</div>
-    <iframe id="soundcloud-bgm" title="TeSTAR — Shining Star Instrumental 背景音樂" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F1849785951&amp;color=%23879dd8&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false&amp;visual=false&amp;single_active=false"></iframe>
+  <footer class="soundcloud-source site-footer" aria-label="背景音樂與活動資訊">
+    <button hidden type="button" id="bgm-toggle" class="bgm-toggle" aria-label="背景音樂" aria-pressed="false">音樂 OFF</button>
+    <details class="music-details"><summary><span>背景音樂 <b>Shining Star</b></span><span class="music-expand" aria-hidden="true">＋</span></summary>
+    <iframe id="soundcloud-bgm" title="TeSTAR — Shining Star Instrumental 背景音樂" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" loading="eager" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F1849785951&amp;color=%23879dd8&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=false&amp;visual=false&amp;single_active=false"></iframe>
     <a href="https://soundcloud.com/kwstore/testar-shining-star_inst" target="_blank" rel="noopener noreferrer">TeSTAR · Shining Star（Instrumental）↗</a>
-    <p id="bgm-status" role="status"></p>
-  </aside>
+    </details><p id="bgm-status" role="status"></p>
+    <div class="footer-credit"><b>吃冰淇淋不加醬油</b> · 非官方同人 COS 企劃</div>
+    <details class="disclaimer"><summary>活動說明與免責聲明<span aria-hidden="true">＋</span></summary><p>本頁為《患上不出道就會死的病》<strong>非官方同人 COS 企劃</strong>，由「吃冰淇淋不加醬油」製作，非原作或音樂權利方之官方企劃。</p><p>作品、角色、歌曲、專輯封面與音樂之權利均屬原權利人。歌曲試聽透過 Apple Music 預覽提供，背景音樂由 SoundCloud 嵌入播放。角色頭貼取自 <a href="https://v.daum.net/v/5KzZH2kUmX" target="_blank" rel="noopener noreferrer">Kakao Entertainment 公開制服海報</a>。</p><p>本投票作為<strong>表演籌備參考</strong>，最終演出內容依現場安排為準。本頁會於瀏覽器儲存投票狀態，送出後將分組結果保存至投票資料庫。</p></details>
+    <div hidden class="local-test-tools" id="local-test-tools"><span>本機測試</span><button type="button" id="reset-local-vote">重設投票紀錄</button></div>
+  </footer>
   <script src="vote-service.js"></script>
   <script>
   (()=>{
     'use strict';
     const songs=Object.freeze({'bloody-paradise':'A','shangri-la':'B'});
-    const names=Array.from({length:7},(_,i)=>({id:`member-${String(i+1).padStart(2,'0')}`,num:String(i+1).padStart(2,'0'),name:'角色名稱',coser:'COSER 的名字'}));
+    const names=window.VoteService?.MEMBERS?Object.entries(VoteService.MEMBERS).map(([id,member])=>({id,...member})):Array.from({length:7},(_,i)=>({id:`member-${String(i+1).padStart(2,'0')}`,num:String(i+1).padStart(2,'0'),name:'角色名稱',coser:'COSER 的名字'}));
     const STORAGE_KEY='debut-or-die:pre-vote-group-v1';
+    const LOCAL_TESTING=location.protocol==='file:'||['localhost','127.0.0.1','[::1]'].includes(location.hostname);
+    const LOCAL_RESET_KEY=STORAGE_KEY+':local-reset-v1';
     const $=id=>document.getElementById(id);
     const assignments=Object.fromEntries(names.map(m=>[m.id,null]));
     let pending=null,receipt=null,busy=false;
@@ -165,12 +199,21 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     const membersFor=song=>names.filter(m=>assignments[m.id]===song);
     const allAssigned=()=>names.every(m=>songs[assignments[m.id]]);
     const persist=()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({assignments,pending,receipt}));}catch{status('此瀏覽器無法儲存選票。請勿重新整理，並保留確認畫面。','error');}};
+    function portraitFor(member){
+      if(member?.avatar&&member.crop){
+        const ns='http://www.w3.org/2000/svg',portrait=document.createElementNS(ns,'svg'),image=document.createElementNS(ns,'image');
+        portrait.classList.add('member-portrait');portrait.setAttribute('viewBox',member.crop.join(' '));portrait.setAttribute('aria-hidden','true');portrait.setAttribute('focusable','false');
+        image.setAttribute('href',member.avatar);image.setAttribute('width','670');image.setAttribute('height','536');portrait.append(image);return portrait;
+      }
+      const placeholder=document.createElement('span');placeholder.className='avatar-placeholder';placeholder.setAttribute('aria-hidden','true');return placeholder;
+    }
     function render(){
       const grid=$('cast-grid');grid.replaceChildren();
       names.filter(member=>!assignments[member.id]).forEach(member=>{
         const value=assignments[member.id];
         const el=document.createElement('div');el.className='cast-card'+(locked()?' locked':'');el.dataset.choice=value||'';el.draggable=!locked();el.dataset.member=member.id;el.setAttribute('aria-label',`成員 ${member.num} ${member.name}，拖曳圓圈分組`);el.draggable=false;
-        const num=document.createElement('div');num.className='cast-number';const face=document.createElement('span');face.className='avatar-placeholder';face.setAttribute('aria-hidden','true');num.append(face);
+        el.style.setProperty('--portrait-accent',member.color||'#94a9e8');
+        const num=document.createElement('div');num.className='cast-number';num.append(portraitFor(member));
         const title=document.createElement('div');title.className='member-title';title.textContent=member.name;
         const coser=document.createElement('div');coser.className='coser';coser.textContent=member.coser;
         el.append(num,title,coser);
@@ -182,26 +225,28 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       for(const [side,song] of [['a','bloody-paradise'],['b','shangri-la']]){
         const container=$(`assigned-${side}`);container.replaceChildren();
         const selected=membersFor(song);
-        $(`count-${side}`).textContent=`${String(selected.length).padStart(2,'0')} / 07`;
         if(!selected.length){const p=document.createElement('p');p.className='empty';p.textContent='';container.append(p);}
         for(const m of selected){
           const avatar=document.createElement('div');avatar.className='stage-avatar';avatar.dataset.member=m.id;
+          avatar.style.setProperty('--portrait-accent',m.color||'#94a9e8');
           avatar.setAttribute('aria-label',`成員 ${m.num} ${m.name}，拖曳可更換歌曲`);
           avatar.title=`成員 ${m.num} ${m.name}`;
-          if(m.avatar){const image=document.createElement('img');image.src=m.avatar;image.alt='';avatar.append(image);}
-          else{const placeholder=document.createElement('span');placeholder.className='avatar-placeholder';placeholder.setAttribute('aria-hidden','true');avatar.append(placeholder);}
+          avatar.append(portraitFor(m));
           container.append(avatar);
         }
       }
       const remain=names.filter(m=>!assignments[m.id]).length;
+      grid.classList.toggle('all-assigned',remain===0);
       $('members').style.setProperty('--assigned',String((7-remain)/7));
       
       $('assignment-hint').innerHTML=remain?`<strong id="remaining">${7-remain}</strong> / 7 已選擇`:'7 / 7 已完成';
       $('review-btn').disabled=!allAssigned()||locked();
       $('review-btn').querySelector('span').textContent=receipt?'已完成投票':pending?'繼續確認選票':'送出選票';
       $('randomize').disabled=locked();$('reset').disabled=locked();
+      $('reset-local-vote').disabled=busy;
       if(receipt){$('submit-heading').textContent='你的分組選票已完成。';$('submit-help').textContent='同一瀏覽器已標記投票完成，感謝你的參與。';}
       else if(pending){$('submit-heading').textContent='有一張尚未確認的選票。';$('submit-help').textContent='請使用同一張選票重試，避免重複紀錄。';$('review-btn').disabled=false;}
+      else{$('submit-heading').textContent='選好七位成員的舞台了嗎？';$('submit-help').textContent='確認陣容後，送出你的選擇。';}
     }
     function assign(id,song){if(locked()||!Object.hasOwn(assignments,id))return;assignments[id]=song;persist();render();status('');const panel=document.querySelector(`.stage-panel[data-song="${song}"]`);if(panel){panel.classList.add('just-dropped');setTimeout(()=>panel.classList.remove('just-dropped'),450);}}
     for(const panel of document.querySelectorAll('.stage-panel')){
@@ -210,6 +255,13 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       panel.addEventListener('drop',e=>{e.preventDefault();panel.classList.remove('drag-over');const id=e.dataTransfer.getData('text/plain');if(Object.hasOwn(assignments,id))assign(id,panel.dataset.song);});
     }
     $('reset').addEventListener('click',()=>{if(locked())return;names.forEach(m=>assignments[m.id]=null);persist();render();status('');});
+    $('local-test-tools').hidden=!LOCAL_TESTING;
+    $('reset-local-vote').addEventListener('click',()=>{
+      if(!LOCAL_TESTING||busy)return;
+      try{localStorage.removeItem(STORAGE_KEY);}catch{status('無法重設，請確認瀏覽器儲存設定。','error');return;}
+      pending=null;receipt=null;names.forEach(member=>assignments[member.id]=null);
+      if(dialog.open)dialog.close();dialog.classList.remove('vote-success','sending');render();status('本機投票紀錄已重設，可以重新測試。','info');
+    });
     $('randomize').addEventListener('click',()=>{if(locked())return;const shuffled=names.map(m=>m.id);for(let i=shuffled.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}shuffled.forEach((id,i)=>assignments[id]=i<3?'bloody-paradise':'shangri-la');persist();render();status('這是一組隨機試排，你可以繼續調整。','info');});
     for(const btn of document.querySelectorAll('.listen-toggle'))btn.addEventListener('click',()=>{const target=$(btn.dataset.player),open=target.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.lastChild.textContent=open?' 收起官方試聽':' 展開官方試聽';});
     const dialog=$('review-dialog');dialog.addEventListener('cancel',e=>{if(busy)e.preventDefault();});
@@ -232,6 +284,10 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       finally{dialog.classList.remove('sending');busy=false;$('confirm-btn').disabled=!!receipt;$('confirm-btn').textContent=receipt?'已完成 ✓':'重試確認';render();}
     });
     try{
+      if(LOCAL_TESTING&&!localStorage.getItem(LOCAL_RESET_KEY)){
+        localStorage.removeItem(STORAGE_KEY);localStorage.setItem(LOCAL_RESET_KEY,'1');
+        status('本機投票紀錄已重設，可以重新測試。','info');
+      }
       const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
       if(saved&&saved.assignments){for(const member of names){if(songs[saved.assignments[member.id]])assignments[member.id]=saved.assignments[member.id];}}
       if(saved?.pending&&window.VoteService?.isValidGroupVote(saved.pending)){pending=saved.pending;for(const m of names)assignments[m.id]=pending.assignments[m.id];status('上一張選票尚未取得成功確認，請重試同一張選票。','info');}
@@ -243,22 +299,38 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     let transitioning=false;
     async function transitionScene(action,label){
       if(transitioning)return;transitioning=true;
-      const wipe=$('scene-wipe');$('scene-label').textContent=label;
+      const wipe=$('scene-wipe'),splash=$('chapter-splash'),floating=$('chapter-float');let heading;
+      $('scene-label').textContent=label;
       try{
         if(!reducedMotion)wipe.classList.add('active');
-        await delay(reducedMotion?0:330);action();
-        await delay(reducedMotion?0:540);
-      }finally{wipe.classList.remove('active');transitioning=false;}
+        await delay(reducedMotion?0:330);heading=action();
+        if(!reducedMotion){
+          floating.innerHTML=heading.innerHTML;splash.hidden=false;heading.style.opacity='0';
+          await delay(540);wipe.classList.remove('active');
+          await delay(520);
+          animatePage(heading.closest('section'));
+          const flights=Array.from(floating.children).map((part,index)=>{
+            const destination=heading.children[index].getBoundingClientRect(),origin=part.getBoundingClientRect();
+            const dx=destination.left+destination.width/2-origin.left-origin.width/2;
+            const dy=destination.top+destination.height/2-origin.top-origin.height/2;
+            const scale=destination.width/origin.width;
+            return part.animate([{transform:'translate(0,0) scale(1)'},{transform:`translate(${dx}px,${dy}px) scale(${scale})`}],{duration:720,easing:'cubic-bezier(.22,.75,.2,1)',fill:'forwards'});
+          });
+          const veil=splash.animate([{backgroundColor:'#ccd9f2'},{backgroundColor:'transparent'}],{duration:650,fill:'forwards'});
+          await Promise.all(flights.map(flight=>flight.finished));heading.style.opacity='';splash.hidden=true;flights.forEach(flight=>flight.cancel());veil.cancel();
+        }
+        if(reducedMotion)animatePage(heading.closest('section'));heading.tabIndex=-1;heading.focus({preventScroll:true});
+      }finally{if(heading)heading.style.opacity='';splash.hidden=true;wipe.classList.remove('active');transitioning=false;}
     }
     function animatePage(target){
-      target.classList.remove('flow-enter');void target.offsetWidth;target.classList.add('flow-enter');
-      setTimeout(()=>target.classList.remove('flow-enter'),1200);
+      target.classList.remove('content-enter');void target.offsetWidth;target.classList.add('content-enter');
+      setTimeout(()=>target.classList.remove('content-enter'),1200);
     }
     function showStage(group){
       document.querySelectorAll('.audio-player audio').forEach(a=>a.pause());
       $('listen').hidden=group;$('members').hidden=!group;document.querySelector('.hero').hidden=true;
-      window.scrollTo({top:0,behavior:'instant'});animatePage(group?$('members'):$('listen'));
-      const heading=group?$('members-title'):$('listen-title');heading.tabIndex=-1;heading.focus({preventScroll:true});
+      window.scrollTo({top:0,behavior:'instant'});
+      return group?$('members-title'):$('listen-title');
     }
     function switchStep(group){return transitionScene(()=>showStage(group),group?'STAGE ASSIGNMENT / 02':'TRACK PREVIEW / 01');}
     $('next-step').addEventListener('click',()=>switchStep(true));
@@ -275,7 +347,7 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     grid.addEventListener('pointermove',e=>{
       if(!drag||e.pointerId!==drag.pointer)return;
       if(!drag.ghost&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>7){
-        drag.ghost=document.createElement('div');drag.ghost.className='drag-ghost';const portrait=document.createElement('span');portrait.className='avatar-placeholder';portrait.setAttribute('aria-hidden','true');drag.ghost.append(portrait);document.body.append(drag.ghost);
+        drag.ghost=document.createElement('div');drag.ghost.className='drag-ghost';drag.ghost.append(portraitFor(names.find(member=>member.id===drag.id)));document.body.append(drag.ghost);
       }
       if(drag.ghost){drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';
         const zone=document.elementFromPoint(e.clientX,e.clientY)?.closest('.stage-panel');
@@ -322,13 +394,27 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     async function startIntroduction(){
       const intro=$('intro-shell'),boot=$('boot-scene'),brief=$('briefing-scene'),copy=$('mission-copy');
       let entered=false,typeTimer=null;
-      const mission='舞台分組指令。\n\n先聆聽兩首歌曲，\n再拖曳成員頭貼，\n選擇他們的舞台。\n\n你的選擇，\n決定下一個舞台。';
+      const missionParts=[
+        {text:'舞台分組任務已發布。\n\n',className:'mission-lead'},
+        {text:'兩首指定曲目',className:'mission-body mission-emphasis'},
+        {text:'，',className:'mission-body'},
+        {text:'七位待分組成員',className:'mission-body mission-emphasis'},
+        {text:'。\n請先完成試聽，再',className:'mission-body'},
+        {text:'拖曳成員頭貼',className:'mission-body mission-emphasis'},
+        {text:'，配置舞台陣容。\n確認分組後，',className:'mission-body'},
+        {text:'提交你的選擇',className:'mission-body mission-emphasis'},
+        {text:'。',className:'mission-body'}
+      ];
+      const mission=missionParts.map(part=>part.text).join('');
+      const missionNodes=missionParts.map(part=>{const node=document.createElement('span');node.className=part.className;return node;});
+      copy.replaceChildren(...missionNodes);
+      function paintMission(length){let remaining=length;missionParts.forEach((part,index)=>{missionNodes[index].textContent=part.text.slice(0,Math.max(0,remaining));remaining-=part.text.length;});}
       async function enterPreview(){
         if(entered)return;entered=true;clearTimeout(typeTimer);requestBackgroundPlayback();
-        $('app-shell').hidden=false;$('app-shell').inert=false;showStage(false);
-        intro.classList.add('intro-leave');
-        await delay(reducedMotion?0:600);intro.hidden=true;document.body.classList.remove('system-intro');
-        const heading=$('listen-title');heading.focus({preventScroll:true});
+        await transitionScene(()=>{
+          $('app-shell').hidden=false;$('app-shell').inert=false;intro.hidden=true;document.body.classList.remove('system-intro');
+          return showStage(false);
+        },'TRACK PREVIEW / 01');
       }
       brief.addEventListener('click',enterPreview);
       let percent=0;
@@ -353,29 +439,39 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
         await delay(reducedMotion?0:250);
       }catch{$('boot-label').textContent='介面已就緒';}
       boot.classList.add('boot-out');await delay(reducedMotion?0:400);boot.hidden=true;brief.hidden=false;brief.focus();
-      if(reducedMotion){copy.textContent=mission;return;}
+      if(reducedMotion){paintMission(mission.length);return;}
       let character=0;
-      function type(){if(entered)return;copy.textContent=mission.slice(0,++character);if(character<mission.length)typeTimer=setTimeout(type,mission[character-1]==='\n'?140:50);}
+      function type(){if(entered)return;paintMission(++character);if(character<mission.length)typeTimer=setTimeout(type,mission[character-1]==='\n'?140:50);}
       type();
     }
     // SoundCloud's official widget controls looping and volume without copying audio.
     function initBackgroundMusic(){
       const toggle=$('bgm-toggle'),notice=$('bgm-status');
-      let widget=null,ready=false,playing=false,wanted=true,hasPlayed=false;
+      let widget=null,ready=false,playing=false,wanted=true,hasPlayed=false,currentVolume=0,fadeFrame=0;
       toggle.hidden=false;toggle.textContent='音樂 ON';toggle.setAttribute('aria-pressed','true');
       const previewPlaying=()=>Array.from(document.querySelectorAll('.audio-player audio')).some(audio=>!audio.paused&&!audio.ended);
-      function volume(){if(ready)widget.setVolume(previewPlaying()?4:18);}
+      function volume(){
+        cancelAnimationFrame(fadeFrame);if(!ready)return;
+        const target=wanted&&!previewPlaying()?6:0,from=currentVolume,start=performance.now(),duration=target===0?220:1100;let sent=0;
+        function tick(now){
+          const fraction=Math.min(1,(now-start)/duration),eased=fraction*fraction*(3-2*fraction);
+          currentVolume=from+(target-from)*eased;
+          if(now-sent>=45||fraction===1){widget.setVolume(currentVolume);sent=now;}
+          if(fraction<1)fadeFrame=requestAnimationFrame(tick);
+        }
+        fadeFrame=requestAnimationFrame(tick);
+      }
       function paint(){toggle.textContent=wanted?'音樂 ON':'音樂 OFF';toggle.setAttribute('aria-pressed',String(wanted));toggle.setAttribute('aria-label',playing?'暫停背景音樂':wanted?'背景音樂已啟用，點擊開始播放':'開啟背景音樂');toggle.title=wanted&&!playing?'點擊以啟動背景音樂':'';}
-      function start(){if(ready&&wanted&&!playing){volume();widget.play();}}
+      function start(){if(ready&&wanted&&!playing){widget.setVolume(currentVolume);widget.play();}}
       requestBackgroundPlayback=start;
       function firstGesture(event){if(event.target.closest('#bgm-toggle'))return;if(!hasPlayed)start();}
       document.addEventListener('pointerdown',firstGesture,{passive:true});document.addEventListener('click',firstGesture);document.addEventListener('keydown',firstGesture);
       toggle.addEventListener('click',()=>{if(!ready){wanted=!wanted;paint();return;}if(playing){wanted=false;widget.pause();}else{wanted=true;start();}paint();});
-      document.querySelectorAll('.audio-player audio').forEach(audio=>['playing','pause','ended','error'].forEach(event=>audio.addEventListener(event,volume)));
+      document.querySelectorAll('.audio-player audio').forEach(audio=>['play','playing','pause','ended','error'].forEach(event=>audio.addEventListener(event,volume)));
       function connect(){
         if(!window.SC?.Widget)return;
         widget=SC.Widget($('soundcloud-bgm'));const events=SC.Widget.Events;
-        widget.bind(events.READY,()=>{ready=true;volume();paint();start();});
+        widget.bind(events.READY,()=>{ready=true;currentVolume=0;widget.setVolume(0);paint();start();});
         widget.bind(events.PLAY,()=>{playing=true;hasPlayed=true;wanted=true;notice.textContent='';volume();paint();document.removeEventListener('pointerdown',firstGesture);document.removeEventListener('click',firstGesture);document.removeEventListener('keydown',firstGesture);});
         widget.bind(events.PAUSE,()=>{playing=false;paint();});
         widget.bind(events.FINISH,()=>{playing=false;if(wanted){widget.seekTo(0);widget.play();}else paint();});
