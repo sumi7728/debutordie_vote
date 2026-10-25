@@ -1,3 +1,7 @@
+/* A continuous lavender-to-ice-blue gradient across the voting experience. */
+:root{--page-gradient:linear-gradient(145deg,#e4d3fc 0%,#dce2ff 38%,#c0def5 72%,#b6e7e4 100%)}
+body{background:var(--page-gradient);background-attachment:fixed}
+.site-shell,.intro-shell{background:radial-gradient(ellipse at 10% 5%,#fff7,transparent 52%),var(--page-gradient)}
 /* Tap-led stage deck. Original album artwork is displayed without cropping. */
 /* Video previews blur only the thumbnail; playback uses the clear YouTube player. */
 .site-shell .masthead{background:linear-gradient(180deg,#fffffff5,#ffffffde);box-shadow:0 3px 14px #738bb90a}
@@ -21,14 +25,14 @@
 /* Shared compact ballot actions and a centered, unframed masthead. */
 #members #review-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;min-height:48px;padding:12px 24px;margin:0 auto;border-radius:999px;font-size:16px;line-height:1.5;letter-spacing:1px}
 #members #review-btn .next-arrow{display:block;flex:none;transition:transform .25s}#members #review-btn:hover:not(:disabled) .next-arrow{transform:translateX(3px)}
-.masthead .mast-main{position:relative;display:flex;justify-content:center;align-items:center;height:100px;margin:0;padding:20px 0 6px;border:0;border-bottom:1px solid #ffffff66;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.masthead .mast-main{position:relative;display:flex;justify-content:center;align-items:center;height:74px;margin:0;padding:13px 0 1px;border:0;border-bottom:1px solid #ffffff66;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
 .masthead .mast-main>.right{position:absolute;top:10px;right:0;display:flex;align-items:center;gap:6px;white-space:nowrap;padding:0;border:0;border-radius:0;background:none;font:700 8px var(--latin);letter-spacing:1.2px;color:#457d73}
 .masthead .mast-main>.right:before{flex:none;margin:0;width:5px;height:5px}
 .masthead .mast-main>.brand{display:flex;align-items:center;justify-content:center;gap:13px;width:auto;text-decoration:none;padding:0}
-.masthead .brand .header-emblem{width:54px;height:54px;flex:none;filter:drop-shadow(0 0 6px #ffffff99)}
+.masthead .brand .header-emblem{width:44px;height:44px;flex:none;filter:drop-shadow(0 0 6px #ffffff99)}
 .masthead .brand-wordmark{font-size:17px;line-height:1.4;font-weight:800;letter-spacing:1px;color:#3c547d}
 .masthead .brand-wordmark small{display:block;margin-top:6px;font:500 7px var(--latin);letter-spacing:2px;color:#7087af}
-@media(max-width:360px){.masthead .mast-main{height:94px}.masthead .mast-main>.right{font-size:7px;letter-spacing:1px}.masthead .brand .header-emblem{width:47px;height:47px}.masthead .brand-wordmark{font-size:15px;letter-spacing:.6px}.masthead .brand-wordmark small{font-size:6px;letter-spacing:1.5px}.masthead .mast-main>.brand{gap:10px}}
+@media(max-width:360px){.masthead .mast-main{height:70px}.masthead .mast-main>.right{top:7px;font-size:7px;letter-spacing:1px}.masthead .brand .header-emblem{width:40px;height:40px}.masthead .brand-wordmark{font-size:15px;letter-spacing:.6px}.masthead .brand-wordmark small{font-size:6px;letter-spacing:1.5px}.masthead .mast-main>.brand{gap:10px}}
 /* Group navigation accents: charcoal/amber and navy/gold. */
 #listen .listening-nav{gap:8px;padding:6px;border-color:#ffffffed;background:#f6f8ffb8}
 #listen .listening-nav button{min-height:34px;padding:8px 13px;border:1px solid transparent;transition:background .3s,color .3s,box-shadow .3s}
@@ -57,3 +61,93 @@
 @keyframes deck-scan{0%{opacity:0;transform:translateY(100%)}20%{opacity:.9}80%{opacity:.75}100%{opacity:0;transform:translateY(-100%)}}@keyframes panel-arrive{from{opacity:0;transform:translateY(35px);filter:blur(4px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}@keyframes signal-pulse{50%{box-shadow:0 0 0 5px #7acdbb08}}@keyframes arrow-rise{0%,100%{transform:translateY(2px)}50%{transform:translateY(-3px)}}@keyframes preview-pulse{50%{box-shadow:0 0 0 6px #94aceb14}}
 @media(max-width:360px){#listen .story-card{grid-template-columns:56px minmax(0,1fr);gap:10px;padding:12px;min-height:105px}#listen .story-card .track-cover{width:56px;height:56px}#listen .story-card .song-title-row h3{font-size:17px}#listen .story-card .mini-play{width:36px;height:36px;flex-basis:36px;font-size:13px}.story-kicker{font-size:9px;letter-spacing:1px}.system-ready{font-size:7px;letter-spacing:.7px}.film-screen{aspect-ratio:auto;height:200px}.listening-nav{margin-top:14px}.film-meta{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.track-deck.is-switching:after,.track-story.scene-arriving .story-heading,.track-story.scene-arriving .story-card,.track-story.scene-arriving .stage-film,.track-story.scene-arriving .story-next,.system-ready i,.story-next i,#listen .story-card.playing .mini-play{animation:none!important}.film-poster,.listening-nav button{transition:none}}
+
+/* Keep the audio iframe measurable when its controls are folded away. */
+.site-footer .bgm-widget{position:fixed;left:0;bottom:0;width:min(100%,480px);height:166px;opacity:0;pointer-events:none;z-index:-1}
+.site-footer .bgm-widget iframe{position:absolute;inset:0;width:100%;height:166px!important;margin:0}
+.site-footer .music-details[open]+.bgm-widget{position:relative;left:auto;bottom:auto;width:100%;opacity:1;pointer-events:auto;z-index:auto;margin:8px 0 10px}
+
+/* Visual ballot review: original covers and named portrait tiles. */
+#review-dialog{width:min(430px,calc(100% - 28px));max-height:88dvh;border-radius:26px;background:linear-gradient(145deg,#f6f4ff,#e5edfc 65%,#e0f2f1);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+#review-dialog .dialog-body{padding:20px}
+#review-dialog .dialog-top{min-height:40px}
+.review-symbol{display:grid;place-items:center;width:42px;height:42px;border:1px solid #fff;border-radius:14px;background:linear-gradient(135deg,#e0e8ff,#e5dcf6);color:#617eb2;box-shadow:0 4px 12px #7b91c014}
+#review-dialog #close-dialog{margin-left:auto;width:36px;height:36px;border-radius:50%;background:#ffffff94;line-height:1}
+#review-dialog .dialog-body h2{font-size:24px;line-height:1.4;letter-spacing:.3px;margin:8px 0 5px;text-align:center;color:#385780}
+#review-dialog #dialog-description{font-size:12px;margin:0;text-align:center;color:#7085a5}
+#review-dialog .review-list{display:grid;gap:12px;margin:20px 0 16px}
+.review-song{--review-accent:#6b8dc5;padding:14px;border:1px solid #fff;border-radius:20px;background:#ffffffb8;box-shadow:0 6px 18px #7084ad09}
+.review-song[data-review-song="shangri-la"]{--review-accent:#9c80bd;background:#fcfaffb8}
+.review-song-head{display:flex;align-items:center;gap:10px;min-width:0}
+.review-cover{display:block;width:44px;height:44px;object-fit:contain;flex:none;border-radius:9px;box-shadow:0 3px 10px #546b8b18}
+.review-song-info{min-width:0;flex:1}
+#review-dialog .review-song-info h3{font:700 15px/1.4 var(--latin),var(--sans);color:#405e86;margin:0;word-break:keep-all;overflow-wrap:normal;letter-spacing:-.2px}
+.review-song-info p{font-size:10px;color:#7a8eaa;margin:4px 0 0}
+.review-count{font-size:10px;font-weight:700;color:var(--review-accent);white-space:nowrap;background:#eef2fb;border-radius:999px;padding:5px 7px}
+.review-members{display:flex;flex-wrap:wrap;gap:12px 10px;padding-top:13px;margin-top:12px;border-top:1px solid #e0e7f480}
+.review-member{display:grid;justify-items:center;gap:5px;width:calc((100% - 30px)/4);min-width:0;animation:review-portrait-in .35s var(--member-delay,0ms) both}
+.review-face{display:block;width:44px;height:44px;overflow:hidden;border-radius:50%;background:#eef1fa;border:2px solid var(--portrait-accent);box-shadow:0 2px 7px #718bb31a}
+.review-face .member-portrait{display:block;width:100%;height:100%}
+.review-name{font-size:11px;line-height:1.4;font-weight:500;color:#536f92;white-space:nowrap}
+.review-empty{width:100%;padding:8px 0;font-size:11px;text-align:center;color:#899ab4;margin:0}
+#review-dialog .dialog-actions{position:sticky;bottom:-20px;z-index:1;padding:12px 0 4px;gap:10px;background:linear-gradient(180deg,#e7eefb00,#e7eefbf5 22%)}
+#review-dialog .dialog-actions button{min-height:48px;border-radius:999px;padding:12px 10px;font-size:14px;letter-spacing:.5px}
+#review-dialog .dialog-actions .primary{font-weight:700;background:linear-gradient(120deg,#dceaff,#e9dffa);border-color:#fff}
+#review-dialog.vote-success .review-symbol{display:none}
+@keyframes review-portrait-in{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
+@media(max-width:360px){#review-dialog .dialog-body{padding:17px}#review-dialog .dialog-body h2{font-size:22px}.review-song{padding:12px}.review-song-head{gap:8px}.review-cover{width:38px;height:38px}#review-dialog .review-song-info h3{font-size:13px}.review-count{font-size:9px;padding:4px 6px}.review-members{gap:12px 8px}.review-member{width:calc((100% - 24px)/4)}.review-face{width:40px;height:40px}.review-name{font-size:10px}#review-dialog .dialog-actions{bottom:-17px}}
+@media(prefers-reduced-motion:reduce){.review-member{animation:none}}
+
+#review-dialog.vote-success .review-list{display:none}
+
+/* Compact bilingual masthead and a quieter ballot page. */
+.masthead .mast-main{height:62px;padding:0}
+.masthead .brand .header-emblem{width:40px;height:40px}
+.masthead .brand-wordmark{font-size:16px;line-height:1.35}
+.masthead .brand-wordmark small{font:500 9px/1.4 var(--sans);letter-spacing:1.5px;margin-top:3px;color:#7d8fb0}
+#members .chapter-title:before{display:none;content:none}
+#members .chapter-title{margin-bottom:20px}
+@media(max-width:360px){.masthead .mast-main{height:58px}.masthead .brand .header-emblem{width:36px;height:36px}.masthead .brand-wordmark{font-size:14px}.masthead .brand-wordmark small{font-size:8px;margin-top:2px}}
+
+/* Notification signals and redacted-result interference. */
+#briefing-scene .mission-lead{display:block;text-align:center;margin-bottom:24px;color:#b75c73;animation:notice-red-pulse 2.6s ease-in-out infinite}
+#briefing-scene .mission-state{color:#398676;background:#e8fbf3b3;border-color:#d2f6e8}
+#briefing-scene .mission-state:before{background:#28bf89;box-shadow:0 0 0 3px #28bf891c,0 0 8px #28bf8966;animation:notice-green-pulse 2.8s ease-in-out infinite}
+.scramble-blocks{display:inline-flex;gap:9px;letter-spacing:0;position:relative}
+.scramble-blocks i{display:inline-block;font-style:normal;color:#fff;transform-origin:center;animation:result-scramble 3.1s steps(1,end) infinite;text-shadow:-1px 0 #c8f3ff,1px 0 #e1cfff}
+.scramble-blocks i:nth-child(2){animation-delay:-.74s;animation-duration:2.9s}
+.scramble-blocks i:nth-child(3){animation-delay:-1.6s;animation-duration:3.7s}
+.scramble-blocks i:nth-child(4){animation-delay:-2.1s;animation-duration:3.3s}
+.scramble-blocks i:nth-child(5){animation-delay:-.4s;animation-duration:3.5s}
+#briefing-scene .briefing-arrow{animation:notice-arrow-right 2s ease-in-out infinite}
+@keyframes notice-red-pulse{0%,100%{color:#ad536c;text-shadow:0 0 0 #d7809000}50%{color:#d47187;text-shadow:0 0 14px #d780903b}}
+@keyframes notice-green-pulse{50%{box-shadow:0 0 0 5px #28bf8910,0 0 12px #28bf8966}}
+@keyframes result-scramble{0%,30%,55%,100%{transform:none;opacity:1;filter:none}33%{transform:translate(2px,-2px) skewX(-12deg);opacity:.8}38%{transform:translate(-2px,1px) scaleY(.65);filter:blur(.4px)}43%{transform:translate(1px,-1px) skewX(9deg)}76%{transform:translate(-1px,2px) scaleX(.8);opacity:.85}82%{transform:translate(2px,0) scaleY(1.12)}87%{transform:none}}
+@keyframes notice-arrow-right{50%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){#briefing-scene .mission-lead,#briefing-scene .mission-state:before,#briefing-scene .briefing-arrow,.scramble-blocks i{animation:none}}
+
+/* TV static and sliced text interference; brightness stays stable. */
+#briefing-scene .mission-copy{display:flex;flex-direction:column;flex:1;justify-content:center;text-align:center;margin:20px 0 24px}
+#briefing-scene .mission-lead{position:relative;flex:none;animation:title-interference .56s steps(1,end) infinite;margin-bottom:20px;color:#b85b75}
+#briefing-scene .mission-detail{display:block;align-content:center;flex:1;text-align:center;white-space:pre-wrap;line-height:1.9}
+#briefing-scene .mission-copy:after{display:none}
+#briefing-scene .mission-reward{flex:none;margin-top:0}
+#briefing-scene .mission-lead:before,#briefing-scene .mission-lead:after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;white-space:pre-wrap;clip-path:inset(35% 0 48%);color:#9a7399;animation:title-slice .39s steps(1,end) infinite}
+#briefing-scene .mission-lead:after{color:#d68b9f;clip-path:inset(65% 0 16%);animation-direction:reverse;animation-duration:.47s}
+.scramble-blocks i{position:relative;animation:none!important;color:transparent;text-shadow:none;overflow:hidden;line-height:1}
+.scramble-blocks i:before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h96v96H0z'/%3E%3C/svg%3E");background-color:#dce3f2;background-size:96px 96px;opacity:.88;filter:contrast(1.8);animation:static-grain .23s steps(1,end) infinite}
+.scramble-blocks i:nth-child(2n):before{animation-direction:reverse;animation-delay:-.07s}
+.scramble-blocks i:nth-child(3n):before{animation-delay:-.13s}
+.scramble-blocks i:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,#fff3 0 1px,transparent 1px 3px);pointer-events:none}
+@keyframes static-grain{0%,100%{background-position:0 0}20%{background-position:-17px 29px}40%{background-position:33px -11px}60%{background-position:-41px -37px}80%{background-position:9px 43px}}
+@keyframes title-slice{0%,100%{transform:translateX(0)}19%{transform:translateX(-3px)}36%{transform:translateX(2px)}52%{transform:translateX(-1px)}73%{transform:translateX(3px)}88%{transform:translateX(0)}}
+@keyframes title-interference{0%,100%{text-shadow:1px 0 #acd7f366,-1px 0 #e5a4c466}25%{text-shadow:-2px 0 #acd7f399,2px 0 #e5a4c499}42%{text-shadow:0 1px #e5a4c466}65%{text-shadow:2px 0 #acd7f399,-1px 0 #e5a4c499}82%{text-shadow:none}}
+@media(prefers-reduced-motion:reduce){#briefing-scene .mission-lead,#briefing-scene .mission-lead:before,#briefing-scene .mission-lead:after,.scramble-blocks i:before{animation:none!important}#briefing-scene .mission-lead:before,#briefing-scene .mission-lead:after{display:none}}
+
+/* Align the bilingual wordmark and keep next-track navigation compact. */
+.masthead .brand-wordmark{display:inline-grid;grid-template-columns:max-content}
+.masthead .brand-wordmark small{display:flex;justify-content:space-between;width:100%;letter-spacing:0}
+.brand-ko-space{width:.45em}
+#listen .story-next{width:max-content;max-width:100%;margin:22px auto 0;padding:13px 18px;gap:5px 18px;border-radius:999px;text-align:center}
+#listen .story-next span,#listen .story-next b{justify-self:center}
+#listen .chapter-title{margin-bottom:18px}

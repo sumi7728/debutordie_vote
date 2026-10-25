@@ -1,10 +1,7 @@
 @echo off
+chcp 65001 >nul
 cd /d "%~dp0"
-where node >nul 2>nul
-if errorlevel 1 (
-  echo Node.js is required to start the local preview.
-  pause
-  exit /b 1
-)
-node preview.cjs --open
-pause
+set "VOTE_NODE=C:\Program Files\nodejs\node.exe"
+if not exist "%VOTE_NODE%" set "VOTE_NODE=node"
+"%VOTE_NODE%" preview.cjs --open
+if errorlevel 1 pause

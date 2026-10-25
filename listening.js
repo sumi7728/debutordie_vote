@@ -10,7 +10,19 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const films=[...listen.querySelectorAll('.stage-film')],players=new Map(),blocked=new Set();
   let youtubePromise,requestedVideo=null;
-  const pause=except=>{if(!except)requestedVideo=null;players.forEach((entry,key)=>{if(key!==except&&entry.ready)entry.player.pauseVideo();});};
+  const visible=film=>{const rect=film.getBoundingClientRect();return !document.hidden&&!listen.hidden&&!film.closest('.track-story').hidden&&rect.bottom>0&&rect.top<innerHeight;};
+  function reportPreview(key,active){
+    document.dispatchEvent(new CustomEvent('stage-preview-state',{detail:{video:key,active}}));
+  }
+  const pause=except=>{
+    if(!except)requestedVideo=null;
+    players.forEach((entry,key)=>{
+      if(key!==except){clearInterval(entry.timer);if(entry.ready)entry.player.pauseVideo();}
+    });
+    films.forEach(film=>{
+      if(film.dataset.video!==except)reportPreview(film.dataset.video,false);
+    });
+  };
   function youtubeAPI(){
     if(window.YT?.Player)return Promise.resolve();
     if(youtubePromise)return youtubePromise;
@@ -28,16 +40,19 @@
     film.querySelector('.film-thumbnail')?.addEventListener('error',event=>{event.currentTarget.hidden=true;});
     const external=film.querySelector('.film-meta a');
     external.href='https://www.youtube.com/watch?v='+clip.id+'&t='+clip.start+'s';
-    const fail=message=>{film.classList.remove('video-active');button.disabled=false;status.textContent=message;};
+    const fail=message=>{
+      reportPreview(key,false);
+      film.classList.remove('video-active');button.disabled=false;status.textContent=message;
+    };
     async function play(){
       if(blocked.has(key))return;
       if(film.closest('.track-story').hidden)return;
       if(location.protocol==='file:'){status.textContent='請以「開啟網頁預覽.cmd」開啟本機網頁，或使用 YouTube 連結觀看舞台。';return;}
-      requestedVideo=key;pause(key);document.dispatchEvent(new Event('stage-preview-play'));
+      requestedVideo=key;pause(key);reportPreview(key,true);document.dispatchEvent(new Event('stage-preview-play'));
       button.disabled=true;status.textContent='正在連接舞台…';
       try{
         await youtubeAPI();
-        if(listen.hidden||film.closest('.track-story').hidden||requestedVideo!==key){button.disabled=false;status.textContent='';return;}
+        if(!visible(film)||requestedVideo!==key){reportPreview(key,false);button.disabled=false;status.textContent='';return;}
         const current=players.get(key);
         if(current?.ready){current.player.loadVideoById({videoId:clip.id,startSeconds:clip.start,endSeconds:clip.start+30});film.classList.add('video-active');button.disabled=false;status.textContent='';replay.hidden=true;return;}
         if(current){button.disabled=false;return;}
@@ -50,18 +65,29 @@
           width:'100%',height:'100%',videoId:clip.id,
           playerVars:{playsinline:1,controls:1,rel:0,start:clip.start,end:clip.start+30,origin:location.origin},
           events:{
+            onAutoplayBlocked:()=>{
+              reportPreview(key,false);button.disabled=false;
+              status.textContent='請點影片中的播放鍵開始觀看。';
+            },
             onReady:event=>{
               clearTimeout(entry.loadTimer);entry.ready=true;const iframe=event.target.getIframe();iframe.title=clip.title+' 副歌舞台影片';iframe.referrerPolicy='strict-origin-when-cross-origin';
               iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
-              if(listen.hidden||film.closest('.track-story').hidden||requestedVideo!==key){event.target.pauseVideo();button.disabled=false;status.textContent='';return;}
+              if(!visible(film)||requestedVideo!==key){event.target.pauseVideo();reportPreview(key,false);button.disabled=false;status.textContent='';return;}
               event.target.setVolume(100);event.target.loadVideoById({videoId:clip.id,startSeconds:clip.start,endSeconds:clip.start+30});
               film.classList.add('video-active');button.disabled=false;status.textContent='';replay.hidden=true;
             },
             onStateChange:event=>{
               clearInterval(entry.timer);
-              if(event.data===YT.PlayerState.PLAYING){
-                if(listen.hidden||film.closest('.track-story').hidden||document.hidden){event.target.pauseVideo();return;}
-                pause(key);document.dispatchEvent(new Event('stage-preview-play'));replay.hidden=true;
+              if(event.data===YT.PlayerState.BUFFERING||event.data===YT.PlayerState.PLAYING){
+                 if(!visible(film)){event.target.pauseVideo();reportPreview(key,false);return;}
+                 reportPreview(key,true);
+               }
+               if(event.data===YT.PlayerState.PAUSED||event.data===YT.PlayerState.ENDED||event.data===YT.PlayerState.CUED){
+                 reportPreview(key,false);
+               }
+               if(event.data===YT.PlayerState.PLAYING){
+                if(listen.hidden||film.closest('.track-story').hidden||document.hidden){event.target.pauseVideo();reportPreview(key,false);return;}
+                pause(key);document.dispatchEvent(new Event('stage-preview-play'));replay.hidden=true;status.textContent='';
                 entry.timer=setInterval(()=>{if(event.target.getCurrentTime()>=clip.start+30){event.target.pauseVideo();clearInterval(entry.timer);replay.hidden=false;status.textContent='30 秒舞台片段播放完畢。';}},200);
               }
               if(event.data===YT.PlayerState.ENDED){replay.hidden=false;status.textContent='30 秒舞台片段播放完畢。';}
@@ -121,7 +147,7 @@
     }
   }
   if('IntersectionObserver'in window){
-    const filmObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting){const current=players.get(entry.target.dataset.video);if(current?.ready)current.player.pauseVideo();}}),{threshold:0});
+    const filmObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting){const key=entry.target.dataset.video,current=players.get(key);if(requestedVideo===key)requestedVideo=null;if(current){clearInterval(current.timer);if(current.ready)current.player.pauseVideo();}reportPreview(key,false);}}),{threshold:0});
     films.forEach(film=>filmObserver.observe(film));
   }
   const refresh=()=>paintNavigation();
