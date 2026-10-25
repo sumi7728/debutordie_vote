@@ -3,7 +3,7 @@
   'use strict';
   const clips={
     bloody:{id:'Pr-4Nze0OyQ',start:51,title:'Bloody Paradise'},
-    shangri:{id:'jou9CPd7Cnw',start:50,title:'Shangri-La 桃源境'}
+    shangri:{id:'jou9CPd7Cnw',start:50,title:'Shangri-La'}
   };
   const listen=document.getElementById('listen');
   if(!listen)return;

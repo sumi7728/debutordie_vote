@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {spawn}=require('node:child_process');
 const root=__dirname;
-const publicFiles=new Set(['index.html','listening.css','listening.js','vote-service.js','logo-vote.svg']);
+const publicFiles=new Set(['index.html','listening.css','listening.js','vote-service.js','logo-vote.svg','admin.html','admin.css','admin.js','admin-data.js','admin-config.js']);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.mp3':'audio/mpeg','.woff2':'font/woff2','.txt':'text/plain; charset=utf-8'};
 const server=http.createServer((request,response)=>{
   if(!['GET','HEAD'].includes(request.method)){response.writeHead(405);response.end();return;}

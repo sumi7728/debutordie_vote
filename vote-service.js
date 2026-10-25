@@ -11,7 +11,7 @@
   const GROUP_POLL_ID='pre-vote-group-v1';
   const SONGS=Object.freeze({
     'bloody-paradise':{title:'Bloody Paradise',artist:'ENHYPEN'},
-    'shangri-la':{title:'Shangri-La 桃源境',artist:'VIXX'}
+    'shangri-la':{title:'Shangri-La',artist:'VIXX'}
   });
   const characterNames=['朴炆旲','宣雅炫','李世振','裴世進','車尤金','金來彬','柳清佑'];
   // Head crops from the original 670 × 536 TeSTAR uniform poster.

@@ -1,0 +1,31 @@
+// Merge with your existing rules; review before deployment.
+// Configured administrator UID; not yet deployed to Firebase.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function admin() { return request.auth != null && request.auth.uid == '0xhAPdCtioX97L6h5ZOTsjeCGl02'; }
+    function validSong(song) { return song in ['bloody-paradise', 'shangri-la']; }
+    function validAssignments(a) {
+      return a is map && a.keys().hasOnly(['member-01','member-02','member-03','member-04','member-05','member-06','member-07']) && a.size() == 7
+          && validSong(a['member-01'])
+          && validSong(a['member-02'])
+          && validSong(a['member-03'])
+          && validSong(a['member-04'])
+          && validSong(a['member-05'])
+          && validSong(a['member-06'])
+          && validSong(a['member-07']);
+    }
+    match /groupVotes/{voteId} {
+      allow list: if admin();
+      // Existing receipts use a random 128-bit ballot ID as a lookup capability.
+      // Keep single-ballot confirmation for lost acknowledgments; never publish IDs.
+      allow get: if admin() || voteId.matches('^[a-f0-9]{32}$');
+      allow create: if voteId.matches('^[a-f0-9]{32}$')
+        && request.resource.data.keys().hasOnly(['pollId','assignments','timestamp'])
+        && request.resource.data.pollId == 'pre-vote-group-v1'
+        && request.resource.data.timestamp == request.time
+        && validAssignments(request.resource.data.assignments);
+      allow update, delete: if false;
+    }
+  }
+}
