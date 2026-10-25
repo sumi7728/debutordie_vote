@@ -232,7 +232,9 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
     'use strict';
     const songs=Object.freeze({'bloody-paradise':'A','shangri-la':'B'});
     const names=window.VoteService?.MEMBERS?Object.entries(VoteService.MEMBERS).map(([id,member])=>({id,...member})):Array.from({length:7},(_,i)=>({id:`member-${String(i+1).padStart(2,'0')}`,num:String(i+1).padStart(2,'0'),name:'角色名稱'}));
-    const STORAGE_KEY='debut-or-die:pre-vote-group-v1';
+    // Fixed round ID: reloading must retain this round's ballot.
+    const LEGACY_STORAGE_KEY='debut-or-die:pre-vote-group-v1';
+    const STORAGE_KEY=LEGACY_STORAGE_KEY+':round-20261025-2';
     const LOCAL_TESTING=location.protocol==='file:'||['localhost','127.0.0.1','[::1]'].includes(location.hostname);
     const $=id=>document.getElementById(id);
     const assignments=Object.fromEntries(names.map(m=>[m.id,null]));
@@ -349,6 +351,9 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
       finally{dialog.classList.remove('sending');busy=false;$('confirm-btn').disabled=!!receipt;$('confirm-btn').textContent=receipt?'已完成 ✓':'重試確認';render();}
     });
     try{
+      // Remove only this poll's previous browser record; preserve this round.
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY+':local-reset-v1');
       const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
       if(saved&&saved.assignments){for(const member of names){if(songs[saved.assignments[member.id]])assignments[member.id]=saved.assignments[member.id];}}
       if(saved?.pending&&window.VoteService?.isValidGroupVote(saved.pending)){pending=saved.pending;for(const m of names)assignments[m.id]=pending.assignments[m.id];status('上一張選票尚未取得成功確認，請重試同一張選票。','info');}
@@ -480,11 +485,11 @@ body{background:radial-gradient(ellipse at 18% 12%,#e1ddff8c,transparent 55%),ra
         {text:'兩首指定曲目',className:'mission-body mission-emphasis'},
         {text:'，',className:'mission-body'},
         {text:'七位候選成員',className:'mission-body mission-emphasis'},
-        {text:'。\n請先試聽曲目，再為',className:'mission-body'},
+        {text:'\n請先試聽曲目，再為',className:'mission-body'},
         {text:'每位成員指定一首歌曲',className:'mission-body mission-emphasis'},
-        {text:'。\n完成七筆選擇後，',className:'mission-body'},
+        {text:'\n完成七筆選擇後，',className:'mission-body'},
         {text:'提交股東決議',className:'mission-body mission-emphasis'},
-        {text:'。',className:'mission-body'}
+        {text:'',className:'mission-body'}
       ];
       const mission=missionParts.map(part=>part.text).join('');
       const missionNodes=missionParts.map(part=>{const node=document.createElement('span');node.className=part.className;return node;});
